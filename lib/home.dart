@@ -68,7 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (status == PermissionStatus.permanentlyDenied) {
       webViewController?.loadUrl(
           urlRequest: URLRequest(
-        url: Uri.parse("https://publicresearch.com.tr"),
+        url: Uri.parse(
+            "https://publicresearch.com.tr/96016b54-8676-41d3-aa21-fcfbf5cf51ea/mobile/cebd69cb-4151-4131-9ddd-1d02c6558448"),
       ));
       Fluttertoast.showToast(
           msg: "Lütfen konum iznini verin.",
@@ -84,7 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (status == PermissionStatus.denied) {
       webViewController?.loadUrl(
           urlRequest: URLRequest(
-        url: Uri.parse("https://publicresearch.com.tr"),
+        url: Uri.parse(
+            "https://publicresearch.com.tr/96016b54-8676-41d3-aa21-fcfbf5cf51ea/mobile/cebd69cb-4151-4131-9ddd-1d02c6558448"),
       ));
       Fluttertoast.showToast(
           msg: "Lütfen konum iznini verin.",
@@ -127,7 +129,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     webViewController = controller;
                   },
                   initialUrlRequest: URLRequest(
-                      url: Uri.parse('https://publicresearch.com.tr')),
+                      url: Uri.parse(
+                          'https://publicresearch.com.tr/96016b54-8676-41d3-aa21-fcfbf5cf51ea/mobile/cebd69cb-4151-4131-9ddd-1d02c6558448')),
                   androidOnGeolocationPermissionsShowPrompt:
                       (InAppWebViewController controller, String origin) async {
                     return GeolocationPermissionShowPromptResponse(
