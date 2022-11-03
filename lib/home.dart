@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
       webViewController?.loadUrl(
           urlRequest: URLRequest(
         url: Uri.parse(
-            "https://publicresearch.com.tr/96016b54-8676-41d3-aa21-fcfbf5cf51ea/mobile/cebd69cb-4151-4131-9ddd-1d02c6558448"),
+            "https://publicresearch.herokuapp.com/96016b54-8676-41d3-aa21-fcfbf5cf51ea/mobile/cebd69cb-4151-4131-9ddd-1d02c6558448"),
       ));
       Fluttertoast.showToast(
           msg: "Lütfen konum iznini verin.",
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
       webViewController?.loadUrl(
           urlRequest: URLRequest(
         url: Uri.parse(
-            "https://publicresearch.com.tr/96016b54-8676-41d3-aa21-fcfbf5cf51ea/mobile/cebd69cb-4151-4131-9ddd-1d02c6558448"),
+            "https://publicresearch.herokuapp.com/96016b54-8676-41d3-aa21-fcfbf5cf51ea/mobile/cebd69cb-4151-4131-9ddd-1d02c6558448"),
       ));
       Fluttertoast.showToast(
           msg: "Lütfen konum iznini verin.",
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   initialUrlRequest: URLRequest(
                       url: Uri.parse(
-                          'https://publicresearch.com.tr/96016b54-8676-41d3-aa21-fcfbf5cf51ea/mobile/cebd69cb-4151-4131-9ddd-1d02c6558448')),
+                          'https://publicresearch.herokuapp.com/96016b54-8676-41d3-aa21-fcfbf5cf51ea/mobile/cebd69cb-4151-4131-9ddd-1d02c6558448')),
                   androidOnGeolocationPermissionsShowPrompt:
                       (InAppWebViewController controller, String origin) async {
                     return GeolocationPermissionShowPromptResponse(
@@ -139,28 +139,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   onUpdateVisitedHistory:
                       (controller, url, androidIsReload) async {
                     RegExp regExp = RegExp(
-                        r"^https://publicresearch.com.tr/survey/solve_survey_list\/(.*)\/");
+                        r"^https://publicresearch.herokuapp.com/survey/solve_survey_list\/(.*)\/");
                     if (regExp.hasMatch(url.toString())) {
                       _askPermission();
                     }
                     RegExp anketorRegExp = RegExp(
-                        r"^https://publicresearch.com.tr/user/single_user\/(.*)\/");
+                        r"^https://publicresearch.herokuapp.com/user/single_user\/(.*)\/");
                     RegExp dashboardRegExp = RegExp(
-                        r"^https://publicresearch.com.tr/survey/view_dashboard\/(.*)\/");
+                        r"^https://publicresearch.herokuapp.com/survey/view_dashboard\/(.*)\/");
                     if (anketorRegExp.hasMatch(url.toString()) ||
                         url.toString() ==
-                            "https://publicresearch.com.tr/survey/list/" ||
+                            "https://publicresearch.herokuapp.com/survey/list/" ||
                         dashboardRegExp.hasMatch(url.toString())) {
                       CookieManager cookieManager = CookieManager.instance();
                       Cookie? cookie = await cookieManager.getCookie(
-                          url: url!, name: "usertype");
+                          url: url!, name: "user_type");
+                      debugPrint(cookie.toString());
+                      debugPrint(cookie?.value.toString());
                       var userType =
                           cookie?.value.toString().replaceAll('"', '');
                       if (userType != "anketor") {
                         webViewController?.loadUrl(
                             urlRequest: URLRequest(
                           url: Uri.parse(
-                              "https://publicresearch.com.tr/user/logout/"),
+                              "https://publicresearch.herokuapp.com/user/logout/"),
                         ));
                         Fluttertoast.showToast(
                             msg: "Lütfen masaüstünden giriş yapın.",
@@ -188,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /* Widget build(BuildContext context) {
     return InAppWebView(
       initialUrlRequest:
-          URLRequest(url: Uri.parse('https://publicresearch.com.tr')),
+          URLRequest(url: Uri.parse('https://publicresearch.herokuapp.com')),
       androidOnGeolocationPermissionsShowPrompt:
           (InAppWebViewController controller, String origin) async {
         return GeolocationPermissionShowPromptResponse(
